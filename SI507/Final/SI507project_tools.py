@@ -23,14 +23,13 @@ class Movie(Base):
     Director = Column(String(100))
     WikiPage = Column(String(100))
     Plot = Column(String(5000))
-    Genre_Id = Column(Integer,ForeignKey('genres.Id'))
+    GenreName = Column(String(100),ForeignKey('genres.Name'))
     Genre = relationship('Genre',backref='movies')
     Actors = relationship('Actor',secondary=association_table,backref='movies')
 
 class Genre(Base):
     __tablename__ = 'genres'
-    Id = Column(Integer, primary_key=True, autoincrement=True)
-    GenreName = Column(String(100))
+    Name = Column(String(100),primary_key=True)
 
 class Actor(Base):
     __tablename__ = 'actors'

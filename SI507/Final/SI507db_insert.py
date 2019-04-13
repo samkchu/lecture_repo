@@ -28,6 +28,22 @@ with open(CSV_FILE, newline='') as csvfile:
 # helper definitions
 possible_genres = ['action','adventure','comedy','crime','drama','fantasy','historical','horror','mystery','thriller','documentary','romance','parody','sci-fi','western','musical','family','animation','other']
 
+actor_dictionary = {}
+error_counter = 0
+
+for item in movies_data:
+    if item[4] == '':
+        pass
+    else:
+        try:
+            actors = item[4].split(', ')
+            for actor in actors:
+                actor_name = actor.split()
+                if actor_name[1] not in actor_dictionary:
+                    actor_dictionary[actor_name[1]] = actor_name[0]
+        except:
+            counter += 1
+
 # helper functions
 
 def standardize_genre(movie_obj):
@@ -61,25 +77,22 @@ def check_genre(genre_name):
         return genre
 
 ### insert records
-
-## for movies
-
-for item in movies_data[1:]:
-    genre = check_genre(standardize_genre(item))
-
-    new_movie = Movie(
-    ReleaseYear = item[0],
-    Title = item[1],
-    Origin = item[2],
-    Director = item[3],
-    WikiPage = item[6],
-    Plot = item[7],
-    GenreName = genre.Name
-    )
-
-    session.add(new_movie)
-
-session.commit()
-
+#
+# for item in movies_data[1:]:
+#     genre = check_genre(standardize_genre(item))
+#
+#     new_movie = Movie(
+#     ReleaseYear = int(item[0]),
+#     Title = item[1],
+#     Origin = item[2],
+#     Director = item[3],
+#     WikiPage = item[6],
+#     Plot = item[7],
+#     GenreName = genre.Name
+#     )
+#
+#     session.add(new_movie)
+#
+# session.commit()
 
 ## for actor

@@ -22,7 +22,7 @@ class Movie(Base):
     Origin  = Column(String(100))
     Director = Column(String(100))
     WikiPage = Column(String(100))
-    Plot = Column(String(1000))
+    Plot = Column(String(5000))
     Genre_Id = Column(Integer,ForeignKey('genres.Id'))
     Genre = relationship('Genre',backref='movies')
     Actors = relationship('Actor',secondary=association_table,backref='movies')
@@ -37,7 +37,6 @@ class Actor(Base):
     Id = Column(Integer, primary_key=True, autoincrement=True)
     ActorFirstName = Column(String(100))
     ActorLastName = Column(String(100))
-
 
 # Create engine
 

@@ -1,5 +1,5 @@
 # Import statements
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Table, Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
@@ -11,8 +11,8 @@ Base = declarative_base()
 
 # create model
 association_table = Table('association', Base.metadata,
-    Column('movie_id', Integer, ForeignKey('movies.Id')))
-    Column('right_id', Integer, ForeignKey('actors.Id'))
+    Column('movie_id', Integer, ForeignKey('movies.Id')),
+    Column('right_id', Integer, ForeignKey('actors.Id')))
 
 class Movie(Base):
     __tablename__ = 'movies'
